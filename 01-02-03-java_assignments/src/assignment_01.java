@@ -6,7 +6,6 @@ public class assignment_01 {
 
         BufferedReader br;
         FileReader fr;
-
         FileWriter fw;
         BufferedWriter bw;
 
@@ -56,15 +55,15 @@ public class assignment_01 {
         LinkedHashMap<String, String> symbtab = new LinkedHashMap<>();
         String reg = "";
         String ICode;
-
         String line;
+
+        bw.write("LC\tOpcode\top1\top2\n");
+        bw.write("-".repeat(20) + "\n");
 
         while ((line = br.readLine()) != null) {
             line = line.trim();
             if (line.isEmpty()) continue;
-
             String[] parts = line.split("\\s+");
-
             ICode = "";
 
             // START directive
@@ -100,10 +99,8 @@ public class assignment_01 {
                 String symbol = parts[3];
 
                 symbtab.putIfAbsent(label, String.valueOf(LC));
-
                 Intstropcode = is.get(opcode);
                 reg = getRegisterCode(regCode);
-
                 symbtab.putIfAbsent(symbol, "-"); // Undefined now, maybe defined later
                 ICode = LC + "\tIS," + Intstropcode + "\t" + reg + "\tS," + symbol;
                 LC++;
@@ -117,7 +114,6 @@ public class assignment_01 {
 
                 Intstropcode = is.get(opcode);
                 reg = getRegisterCode(regCode);
-
                 symbtab.putIfAbsent(symbol, "-");
                 ICode = LC + "\tIS," + Intstropcode + "\t" + reg + "\tS," + symbol;
                 LC++;
@@ -126,6 +122,7 @@ public class assignment_01 {
             // Instruction with just opcode like STOP
             else if (parts.length == 1) {
                 String opcode = parts[0];
+
                 Intstropcode = is.get(opcode);
 
                 if (Intstropcode != null) {
@@ -144,6 +141,7 @@ public class assignment_01 {
             bw.write(ICode + "\n");
         }
 
+        bw.write("-".repeat(20) + "\n");
         br.close();
         bw.close();
 

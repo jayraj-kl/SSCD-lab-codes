@@ -88,9 +88,9 @@ public class assignment_01_extra {
                     symbolAddress = symbolTable.get(expression);
                     LC = Integer.parseInt(symbolAddress);
                 } 
-                // else {
-                    // // If it's just a constant what is the LC then?
-                // }
+                else {
+                    LC = Integer.parseInt(expression);
+                }
                 output = "-\tAD," + DIRECTIVE.get("ORIGIN") + "\t-\t(S," + symbolAddress + ")+ (C," + constant + ")";
             }
 
@@ -107,7 +107,7 @@ public class assignment_01_extra {
                 } else {
                     symbolTable.put(symbol1, expression);
                 } 
-                output = "-\tAD," + DIRECTIVE.get("EQU") + "\t(S," + symbolAddress + ")\t(C," + constant + ")";
+                output = "-\tAD," + DIRECTIVE.get("EQU") + "\t-\t(S," + symbolAddress + ")\t(C," + constant + ")";
             }
             
             // Declaration with label (e.g., "X DC 5" or "Y DS 1")

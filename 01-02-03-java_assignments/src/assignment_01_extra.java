@@ -68,11 +68,12 @@ public class assignment_01_extra {
             else if (tokens[0].equals("ORIGIN")) {
                 String expression = tokens[1];
                 String symbolAddress = "";
+                String symbolName = "";
                 String constant = "0";
                  
                  if (expression.contains("+")) {
                     String[] p = expression.split("\\+");
-
+                    symbolAddress = p[0];
                     symbolAddress = symbolTable.get(p[0]);
                     constant = p[1];
                     LC = Integer.parseInt(symbolAddress) + Integer.parseInt(constant);
@@ -80,34 +81,33 @@ public class assignment_01_extra {
                 else if (expression.contains("-")) {
                     String[] p = expression.split("\\-");
                     symbolAddress = symbolTable.get(p[0]);
-                
+                    symbolName = p[0];
                     constant = p[1];
                     LC = Integer.parseInt(symbolAddress) - Integer.parseInt(constant);
                 } 
                 else if (symbolTable.containsKey(expression)) {
                     symbolAddress = symbolTable.get(expression);
+                    symbolName = expression;
                     LC = Integer.parseInt(symbolAddress);
                 } 
                 else {
                     LC = Integer.parseInt(expression);
                 }
-                output = "-\tAD," + DIRECTIVE.get("ORIGIN") + "\t-\t(S," + symbolAddress + ")+ (C," + constant + ")";
+                output = "-\tAD," + DIRECTIVE.get("ORIGIN") + "\t-\t(S," + symbolName + ")+ (C," + constant + ")";
             }
 
             // EQU directive (e.g., "NEWX EQU X" assigns NEWX the same address as X)
             else if (tokens.length == 3 && tokens[1].equals("EQU")) {
                 String symbol1 = tokens[0];
                 String expression = tokens[2];
-                String symbolAddress = "";
                 String constant = "0";
 
                 if (symbolTable.containsKey(expression)) {
                     symbolTable.put(symbol1, symbolTable.get(expression));
-                    symbolAddress = symbolTable.get(expression);
                 } else {
                     symbolTable.put(symbol1, expression);
                 } 
-                output = "-\tAD," + DIRECTIVE.get("EQU") + "\t-\t(S," + symbolAddress + ")\t(C," + constant + ")";
+                output = "-\tAD," + DIRECTIVE.get("EQU") + "\t-\t(S," + expression + ")\t(C," + constant + ")";
             }
             
             // Declaration with label (e.g., "X DC 5" or "Y DS 1")

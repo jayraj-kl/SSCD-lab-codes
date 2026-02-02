@@ -40,13 +40,13 @@ public class assignment_03 {
         List<MNTEntry> mnt = new ArrayList<>();
         List<MDTEntry> mdt = new ArrayList<>();
         List<ALAEntry> alaList = new ArrayList<>();
-        List<ALAEntry> alaAll = new ArrayList<>();  //
+        // List<ALAEntry> alaAll = new ArrayList<>();  //
 
         boolean isMacro = false;
         String macroName = "";
         int mdtIndex = 1;
         int alaIndex = 1;
-        int alaAllIndex = 1;                    //
+        // int alaAllIndex = 1;                    //
 
         String line;
         while ((line = reader.readLine()) != null) {
@@ -56,13 +56,14 @@ public class assignment_03 {
             if (line.equalsIgnoreCase("MACRO")) {
                 isMacro = true;
                 macroName = "";
-                alaList.clear();
+                // alaList.clear();
                 continue;
             }
 
             if (isMacro) {
                 if (line.equalsIgnoreCase("MEND")) {
                     mdt.add(new MDTEntry("MEND"));
+                    mdtIndex++;
                     isMacro = false;
                     continue;
                 }
@@ -73,10 +74,10 @@ public class assignment_03 {
 
                     while (argsArr.length > 0) {
                         alaList.add(new ALAEntry(alaIndex, argsArr[0]));
-                        alaAll.add(new ALAEntry(alaAllIndex, argsArr[0]));          //
+                        // alaAll.add(new ALAEntry(alaAllIndex, argsArr[0]));          //
                         argsArr = Arrays.copyOfRange(argsArr, 1, argsArr.length);
                         alaIndex++;
-                        alaAllIndex++;                                             //
+                        // alaAllIndex++;                                             //
                     }
 
                     mnt.add(new MNTEntry(macroName, mdtIndex));
@@ -86,9 +87,9 @@ public class assignment_03 {
                     String[] parts = line.split("\\s+");
                     String[] operands = parts[1].split(",");
 
-                    for (ALAEntry alaEntry : alaList) {
-                        if (operands[1].equals(alaEntry.argument)) {
-                            line = parts[0] + " " + operands[0] + ",#" + alaEntry.index;
+                    for (int i = 0; i < alaList.size(); i++) {
+                        if (operands[1].equals(alaList.get(i).argument)) {
+                            line = parts[0] + " " + operands[0] + ",#" + alaList.get(i).index;
                             break;
                         }
                     }
@@ -119,8 +120,8 @@ public class assignment_03 {
         }
 
         System.out.println("\nALA (Argument List Array):");
-        for (int i = 0; i < alaAll.size(); i++) {
-            System.out.printf("%-10d %-20s%n", i + 1, alaAll.get(i).argument);
+        for (int i = 0; i < alaList.size(); i++) {
+            System.out.printf("%-10d %-20s%n", i + 1, alaList.get(i).argument);
             
         }
     }

@@ -1,0 +1,16 @@
+int
+char
+100
+var
+abc
+a234
+
+int area,Per,var;
+
+sum = num1 + num;
+
+int a[10];
+area = PI * R * R;
+if (a > b && c < d) {
+	int f1();
+}

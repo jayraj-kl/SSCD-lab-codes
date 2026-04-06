@@ -40,13 +40,11 @@ public class assignment_03 {
         List<MNTEntry> mnt = new ArrayList<>();
         List<MDTEntry> mdt = new ArrayList<>();
         List<ALAEntry> alaList = new ArrayList<>();
-        // List<ALAEntry> alaAll = new ArrayList<>();  //
 
         boolean isMacro = false;
         String macroName = "";
         int mdtIndex = 1;
         int alaIndex = 1;
-        // int alaAllIndex = 1;                    //
 
         String line;
         while ((line = reader.readLine()) != null) {
@@ -56,7 +54,6 @@ public class assignment_03 {
             if (line.equalsIgnoreCase("MACRO")) {
                 isMacro = true;
                 macroName = "";
-                // alaList.clear();
                 continue;
             }
 
@@ -74,10 +71,8 @@ public class assignment_03 {
 
                     while (argsArr.length > 0) {
                         alaList.add(new ALAEntry(alaIndex, argsArr[0]));
-                        // alaAll.add(new ALAEntry(alaAllIndex, argsArr[0]));          //
                         argsArr = Arrays.copyOfRange(argsArr, 1, argsArr.length);
                         alaIndex++;
-                        // alaAllIndex++;                                             //
                     }
 
                     mnt.add(new MNTEntry(macroName, mdtIndex));

@@ -150,6 +150,7 @@ public class assignment_01_extra {
                 output = LC + "\tIS," + IMPERATIVE.get(tokens[0]);
                 LC++;
             }
+            
             else {
                 output = "Invalid: " + line;
             }

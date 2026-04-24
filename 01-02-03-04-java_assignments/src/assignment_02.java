@@ -34,7 +34,7 @@ public class assignment_02 {
 
             if (instr.startsWith("IS")) {
                 String opcode = instr.split(",")[1];
-                String register = reg.equals("-") ? "0" : reg;
+                String register = (reg.equals("-")) ? "0" : reg;
                 String memory = "000";
                 
                 if (operand.startsWith("S,")) {
